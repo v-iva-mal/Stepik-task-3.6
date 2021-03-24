@@ -5,7 +5,7 @@ from selenium.webdriver.chrome.options import Options
 def pytest_addoption(parser):
     parser.addoption('--browser_name',
                      action='store',
-                     default=None,
+                     default="chrome",
                      help="Choose browser: chrome or firefox")
     parser.addoption('--language',
                      action='store',
@@ -17,8 +17,7 @@ def browser(request):
     browser_name = request.config.getoption("browser_name")
     user_language = request.config.getoption("language")
     #if browser_name == "chrome" or browser_name is not specified, then by default we use "chrome"
-    if browser_name == "chrome" or browser_name == None:
-        browser_name = "chrome"
+    if browser_name == "chrome":
         options = Options()
         options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
         print("\nstart chrome browser for test..")
